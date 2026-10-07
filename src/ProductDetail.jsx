@@ -3,6 +3,7 @@ import keyboardFidget from "./assets/keyboardFidget.jpeg"
 import "./style/ProductDetail.css";
  import { useContext } from 'react'
  import { CartContext } from './context/Cart'
+ import { useEffect } from 'react'
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -55,6 +56,10 @@ export default function ProductDetail() {
       </div>
     );
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="product-detail-page">

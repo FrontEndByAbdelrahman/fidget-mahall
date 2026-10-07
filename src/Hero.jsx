@@ -1,6 +1,13 @@
 import "./style/Hero.css";
 import logo from "./assets/fidgetlogo.jpeg"
 export default function Hero() {
+  const scrollToProducts = () => {
+    const element = document.getElementById('products')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="hero">
       <div className="hero-content">
@@ -17,7 +24,7 @@ export default function Hero() {
         </p>
 
         <div className="hero-actions">
-          <button className="hero-btn">Shop NOW</button>
+          <button onClick={scrollToProducts} className="hero-btn">Shop NOW</button>
         </div>
       </div>
 

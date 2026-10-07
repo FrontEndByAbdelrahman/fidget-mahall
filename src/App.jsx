@@ -9,9 +9,29 @@ import ProductsSec from './ProductsSec'
 import Features from './Features'
 import Footer from './Footer'
 import ProductDetail from './ProductDetail'
-
+import CheckOut from './CheckOut'
+import keyboardFidget from "./assets/keyboardFidget.jpeg";
 function App() {
-    const [cart, setCart] = useState([]);
+   const [cart, setCart] = useState([
+    {
+        id: 1,
+        name: "Keyboard Fidget",
+        description: "...",
+        image: keyboardFidget,
+        price: 24.99,
+        badge: "NEW",
+        quantity: 1
+    },
+    {
+        id: 2,
+        name: "Spin Fidget",
+        description: "...",
+        image: keyboardFidget,
+        price: 19.9,
+        badge: "POPULAR",
+        quantity: 2
+    }
+]);
     return (
         <CartContext.Provider value={{ cart, setCart }}>
         <>
@@ -28,6 +48,12 @@ function App() {
                 <Route path="/product/:id" element={
                     <>
                         <ProductDetail />
+                        <Footer />
+                    </>
+                } />
+                <Route path="/checkout" element={
+                    <>
+                        <CheckOut />
                         <Footer />
                     </>
                 } />

@@ -20,7 +20,7 @@ export default function Features() {
   ];
 
   return (
-    <section className="features-section">
+    <section id="features" className="features-section">
       <div className="features-container">
         <h2>Why Choose Us?</h2>
         <p className="subtitle">We provide the best fidget toys with exceptional service</p>

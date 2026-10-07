@@ -55,7 +55,7 @@ export default function ProductsSec() {
     
     return (
 
-        <section className="products-section">
+        <section id="products" className="products-section">
             <div className="products-container">
                 <h2>Our Products</h2>
                 <p className="subtitle">Discover our premium fidget toys designed for relaxation and focus</p>

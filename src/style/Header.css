@@ -3,8 +3,16 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 4rem;
-    background: var(--color-background);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    background: rgba(8, 18, 32, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(80, 160, 255, 0.12);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 .header-container{
     width: 100%;
