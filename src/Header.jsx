@@ -51,10 +51,10 @@ import { Link, useNavigate } from 'react-router-dom'
             <p onClick={handleShopClick}>Shop</p>
             <p onClick={handleFeaturesClick}>Features</p>
         </div>
-        <div className="cart-container">
+        <div className="cart-container" onClick={() => navigate('/checkout')}>
          <p className="cart-count">{cart.reduce((total, item) => total + item.quantity, 0)}</p>
         <img className="cart-icon"  src={cartIcon} alt="cart" />
-    
+
         </div>
       </div>
 
