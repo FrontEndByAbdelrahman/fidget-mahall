@@ -1,0 +1,30 @@
+*{
+ padding: 0;
+ margin: 0;
+ box-sizing: border-box;
+}
+:root {
+   /* =========================
+     Colors
+  ========================= */
+
+    --color-primary: #ffffff;
+  --color-secondary: #0b0b0f;
+  --color-accent: #7c6cff;
+
+  --color-background: #0b0b0f;
+  --color-surface: #131318;
+  --color-text: #f5f5f7;
+  --color-muted: #9696a3;
+
+  /* Typography */
+  --font-main: "Inter", sans-serif;
+
+  /* Spacing */
+  --container-width: 1200px;
+
+  /* Border */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}

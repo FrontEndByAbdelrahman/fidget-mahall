@@ -1,0 +1,145 @@
+.hero {
+  min-height: 650px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 40px;
+  background-color: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.hero-content {
+  max-width: 560px;
+}
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+
+  color: var(--color-accent);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(52px, 5vw, 78px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  color: var(--color-primary);
+}
+
+.hero h1 span {
+  color: var(--color-accent);
+}
+
+.hero p {
+  max-width: 480px;
+  margin: 28px 0;
+
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero-btn {
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 16px 30px;
+
+  background: var(--color-accent);
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+
+.logo-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.logo-container img {
+  position: relative;
+  z-index: 2;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 480px;
+
+  object-fit: contain;
+}
+
+.product-glow {
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.12;
+
+  filter: blur(50px);
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    padding: 60px 3rem;
+    gap: 40px;
+  }
+  .logo-container {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 50px 2rem;
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 40px;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+  .logo-container {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 40px 1.5rem;
+    gap: 30px;
+  }
+  .logo-container {
+    width: 260px;
+    height: 260px;
+  }
+}
