@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { CartContext } from './context/Cart'
 import { useContext } from 'react'
@@ -10,28 +10,17 @@ import Features from './Features'
 import Footer from './Footer'
 import ProductDetail from './ProductDetail'
 import CheckOut from './CheckOut'
-import keyboardFidget from "./assets/keyboardFidget.jpeg";
+
 function App() {
-   const [cart, setCart] = useState([
-    {
-        id: 1,
-        name: "Keyboard Fidget",
-        description: "...",
-        image: keyboardFidget,
-        price: 24.99,
-        badge: "NEW",
-        quantity: 1
-    },
-    {
-        id: 2,
-        name: "Spin Fidget",
-        description: "...",
-        image: keyboardFidget,
-        price: 19.9,
-        badge: "POPULAR",
-        quantity: 2
-    }
-]);
+    const [cart, setCart] = useState(() => {
+        const savedCart = localStorage.getItem('cart')
+        return savedCart ? JSON.parse(savedCart) : []
+    })
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart])
+
     return (
         <CartContext.Provider value={{ cart, setCart }}>
         <>
@@ -61,7 +50,7 @@ function App() {
         </>
         </CartContext.Provider>
     )
-  
+
 }
 
 export default App

@@ -16,7 +16,7 @@ export default function ProductsSec() {
             name: "Keyboard Fidget",
             description: "A keyboard fidget is a type of fidget toy that is designed to be used with a computer keyboard. It is typically a small handheld device that helps keep your hands busy while working.",
             image: keyboardFidget,
-            price: "$24.99",
+            price: 24.99,
             badge: "NEW",
         },
         {
@@ -24,7 +24,7 @@ export default function ProductsSec() {
             name: "Spin Fidget",
             description: "A smooth spinning fidget toy perfect for stress relief and focus. Features premium bearings for silent operation and long-lasting performance.",
             image: keyboardFidget,
-            price: "$19.99",
+            price: 19.99,
             badge: "POPULAR",
         },
         {
@@ -32,7 +32,7 @@ export default function ProductsSec() {
             name: "Click Fidget",
             description: "Satisfying clicking mechanism that provides tactile feedback. Great for anxiety relief and concentration during work or study sessions.",
             image: keyboardFidget,
-            price: "$14.99",
+            price: 14.99,
             badge: null,
         },
         {
@@ -40,7 +40,7 @@ export default function ProductsSec() {
             name: "Stress Ball",
             description: "Premium quality stress ball with ergonomic design. Helps relieve tension and improve hand strength with daily use.",
             image: keyboardFidget,
-            price: "$12.99",
+            price:  12.99,
             badge: "SALE",
         }
     ]);
