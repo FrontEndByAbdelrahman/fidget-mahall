@@ -28,34 +28,47 @@
    <p className="cart-section-title">Shopping Cart</p>
    <div className="cart-items">
     {cart.map((item) => (
-    <div className="checkout-product" key={item.id}>
-    <div className="product-media">
-      <img src={item.image} alt={item.name} />
-    </div>
+    <div className="co-item-card" key={item.id}>
+      <div className="co-item-image">
+        <img src={item.image} alt={item.name} />
+      </div>
 
-    <div className="product-body">
-        <div className="product-header">
-          <h2>{item.name}</h2>
+      <div className="co-item-details">
+        <div className="co-item-header">
+          <h3 className="co-item-name">{item.name}</h3>
           <button
             type="button"
-            className="remove-btn"
-            aria-label={`Remove ${item.name}`}
+            className="co-item-delete"
             onClick={() => handleRemoveItem(item.id)}
           >
-            ×
+            ✕
           </button>
         </div>
-        <p className="product-unit-price">{item.price} EGP each</p>
-        <div className="product-footer">
-          <div className="quantity-controls">
-            <button type="button" className="quantity-btn" aria-label="Decrease quantity" onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
-            <span className="quantity">{item.quantity}</span>
-            <button type="button" className="quantity-btn" aria-label="Increase quantity" onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
+
+        <p className="co-item-price">{item.price} EGP</p>
+
+        <div className="co-item-footer">
+          <div className="co-qty-wrapper">
+            <button
+              type="button"
+              className="co-qty-btn"
+              onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+            >
+              −
+            </button>
+            <span className="co-qty-value">{item.quantity}</span>
+            <button
+              type="button"
+              className="co-qty-btn"
+              onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+            >
+              +
+            </button>
           </div>
-          <p className="product-line-total">{item.price * item.quantity} EGP</p>
+          <p className="co-item-total">{item.price * item.quantity} EGP</p>
         </div>
+      </div>
     </div>
-</div>
     ))}
 
     <p className="order-summary-title">Order Summary</p>

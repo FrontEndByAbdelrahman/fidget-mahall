@@ -1,16 +1,34 @@
-# React + Vite
+# Fidget Mahall
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+متجر إلكتروني لبيع ألعاب الفيدجت (Fidget Toys) 
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## التقنيات المستخدمة
 
-## React Compiler
+- React 19
+- Vite
+- React Router
+- CSS (Vanilla)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## التشغيل
 
-## Expanding the ESLint configuration
+```bash
+# تثبيت المكتبات
+npm install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# تشغيل بيئة التطوير
+npm run dev
+
+# بناء المشروع للإنتاج
+npm run build
+
+# معاينة البناء
+npm run preview
+```
+
+## الأوامر المتاحة
+
+- `npm run dev` - تشغيل سيرفر التطوير
+- `npm run build` - بناء المشروع
+- `npm run lint` - فحص الكود
+- `npm run preview` - معاينة النسخة المبنية

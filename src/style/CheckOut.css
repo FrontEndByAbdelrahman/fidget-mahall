@@ -77,11 +77,9 @@
    Product Card
 ========================= */
 
-.checkout-product {
-    display: grid;
-    grid-template-columns: 92px minmax(0, 1fr);
-    align-items: stretch;
-    gap: 69px;
+.co-item-card {
+    display: flex;
+    gap: 16px;
     padding: 16px;
     background: rgba(255, 255, 255, 0.035);
     border: 1px solid rgba(80, 160, 255, 0.12);
@@ -89,162 +87,136 @@
     transition: 0.2s ease;
 }
 
-.checkout-product:hover {
+.co-item-card:hover {
     background: rgba(70, 140, 220, 0.08);
     border-color: rgba(90, 170, 255, 0.22);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-.product-media {
+.co-item-image {
     flex-shrink: 0;
-    border-radius: 14px;
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(0, 0, 0, 0.2);
-    aspect-ratio: 1;
 }
 
-.checkout-product img {
+.co-item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.product-body {
+.co-item-details {
+    flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
-.product-header {
+.co-item-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
 }
 
-.product-header h2 {
+.co-item-name {
     margin: 0;
-    font-size: 1.02rem;
+    font-size: 1rem;
     font-weight: 600;
-    line-height: 1.35;
-    overflow-wrap: anywhere;
+    line-height: 1.4;
     color: #e8f1ff;
+    flex: 1;
 }
 
-.product-unit-price {
+.co-item-delete {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(255, 82, 82, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 82, 82, 0.1);
+    color: #ff5252;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.co-item-delete:hover {
+    background: rgba(255, 82, 82, 0.2);
+    border-color: rgba(255, 82, 82, 0.5);
+}
+
+.co-item-price {
     margin: 0;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: #8fa3bc;
 }
 
-.product-footer {
+.co-item-footer {
     margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    flex-wrap: wrap;
-    padding-top: 4px;
 }
 
-.product-line-total {
-    margin: 0;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #72c8ff;
-    font-variant-numeric: tabular-nums;
-}
-
-/* Quantity Controls */
-
-.quantity-controls {
-    display: inline-flex;
+.co-qty-wrapper {
+    display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     padding: 4px;
-    border-radius: 10px;
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.quantity-btn {
-    width: 32px;
-    height: 32px;
-
+.co-qty-btn {
+    width: 28px;
+    height: 28px;
     border: 1px solid rgba(80, 160, 255, 0.3);
-    border-radius: 8px;
-
+    border-radius: 6px;
     background: rgba(80, 160, 255, 0.1);
-
     color: #72c8ff;
-
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-
     cursor: pointer;
-
     transition: all 0.2s ease;
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.quantity-btn:hover {
+.co-qty-btn:hover {
     background: rgba(80, 160, 255, 0.2);
     border-color: rgba(80, 160, 255, 0.5);
 }
 
-.quantity-btn:active {
-    transform: scale(0.95);
-}
-
-.quantity {
-    font-size: 0.95rem;
+.co-qty-value {
+    font-size: 0.9rem;
     font-weight: 600;
     color: #e8f1ff;
-    min-width: 28px;
+    min-width: 24px;
     text-align: center;
     font-variant-numeric: tabular-nums;
 }
 
-/* Remove Button */
-
-.remove-btn {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-
-    border: 1px solid rgba(255, 82, 82, 0.3);
-    border-radius: 6px;
-
-    background: rgba(255, 82, 82, 0.1);
-
-    color: #ff5252;
-
-    font-size: 1.3rem;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.remove-btn:hover {
-    background: rgba(255, 82, 82, 0.2);
-    border-color: rgba(255, 82, 82, 0.5);
-}
-
-.remove-btn:active {
-    transform: scale(0.95);
+.co-item-total {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #72c8ff;
+    font-variant-numeric: tabular-nums;
 }
 
 /* =========================
@@ -475,28 +447,32 @@
         padding: 20px;
     }
 
-    .checkout-product {
-        grid-template-columns: 72px minmax(0, 1fr);
+    .co-item-card {
         gap: 12px;
         padding: 12px;
     }
 
-    .product-header h2 {
+    .co-item-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .co-item-name {
         font-size: 0.95rem;
     }
 
-    .product-line-total {
-        font-size: 0.98rem;
+    .co-item-total {
+        font-size: 0.95rem;
     }
 
-    .quantity-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 1rem;
-    }
-
-    .quantity {
+    .co-qty-btn {
+        width: 26px;
+        height: 26px;
         font-size: 0.9rem;
+    }
+
+    .co-qty-value {
+        font-size: 0.85rem;
     }
 
     .customer-title {
@@ -523,23 +499,38 @@
         padding: 16px;
     }
 
-    .checkout-product {
-        grid-template-columns: 60px minmax(0, 1fr);
+    .co-item-card {
         gap: 10px;
+        padding: 10px;
     }
 
-    .product-header h2 {
+    .co-item-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .co-item-name {
         font-size: 0.9rem;
     }
 
-    .product-line-total {
-        font-size: 0.92rem;
+    .co-item-total {
+        font-size: 0.9rem;
     }
 
-    .remove-btn {
-        width: 26px;
-        height: 26px;
-        font-size: 1.1rem;
+    .co-qty-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 0.85rem;
+    }
+
+    .co-qty-value {
+        font-size: 0.8rem;
+    }
+
+    .co-item-delete {
+        width: 24px;
+        height: 24px;
+        font-size: 1rem;
     }
 
     .form-group input,

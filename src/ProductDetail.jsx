@@ -80,10 +80,8 @@ export default function ProductDetail() {
             <button className="add-to-cart-btn"  onClick={()=>{
                             
                                   if(!cart.some(item => item.id === product.id)){
-                                    // add to cart
                                     setCart([...cart, { ...product, quantity: 1 }])
                                   } else {
-                                    // update quantity
                                     setCart(cart.map(item => item.id === product.id ? {...item, quantity: item.quantity + 1} : item))
                                   }
                                 }}>Add to Cart</button>
