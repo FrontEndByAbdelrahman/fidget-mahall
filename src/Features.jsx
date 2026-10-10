@@ -4,34 +4,43 @@ export default function Features() {
   const features = [
     {
       icon: "⚡",
-      title: "Fast Delivery",
-      description: "Get your order delivered quickly with our express shipping service."
+      title: "Careful Order Handling",
+      description: "Your order is delivered straight to your doorstep."
     },
     {
       icon: "💰",
       title: "Cash on Delivery",
-      description: "Pay when you receive your order. Convenient and secure."
+      description: "Inspect your product when it arrives, then confirm receipt and pay with confidence."
     },
     {
       icon: "❤️",
-      title: "Customer First",
-      description: "Your satisfaction is our priority. Best shopping experience."
+      title: "A Customer-First Experience",
+      description: "From choosing your fidget to receiving your order, we focus on making your experience enjoyable."
     }
   ];
 
   return (
     <section id="features" className="features-section">
       <div className="features-container">
-        <h2>Why Choose Us?</h2>
-        <p className="subtitle">We provide the best fidget toys with exceptional service</p>
+        <div className="features-heading">
+          <span className="features-eyebrow">THE FIDGET MAHALL PROMISE</span>
+          <h2>A Better Way to Shop</h2>
+          <p className="subtitle">Thoughtful products and a smooth experience from checkout through delivery.</p>
+        </div>
         
         <div className="features-grid">
           {features.map((feature, index) => (
-            <div className="feature-card" key={index}>
-              <div className="feature-icon">{feature.icon}</div>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-            </div>
+            <article className="feature-card" key={feature.title}>
+              <div className="feature-card-top">
+                <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
+                <span className="feature-number">0{index + 1}</span>
+              </div>
+              <div className="feature-copy">
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </div>
+              <div className="feature-card-line" aria-hidden="true" />
+            </article>
           ))}
         </div>
       </div>

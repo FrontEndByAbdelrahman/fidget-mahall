@@ -1,92 +1,121 @@
-import keyboardFidget  from "./assets/keyboardFidget.jpeg";
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './style/ProductsSec.css'
-import { useContext } from 'react'
 import { CartContext } from './context/Cart'
-import { useEffect } from 'react'
-
+import { getProducts } from './lib/supabase'
+import './style/ProductsSec.css'
 
 export default function ProductsSec() {
-    const navigate = useNavigate();
-   const { cart, setCart } = useContext(CartContext)
-    const [products, setProducts] = useState([
-        {
-            id: 1,
-            name: "Keyboard Fidget",
-            description: "A keyboard fidget is a type of fidget toy that is designed to be used with a computer keyboard. It is typically a small handheld device that helps keep your hands busy while working.",
-            image: keyboardFidget,
-            price: 24.99,
-            badge: "NEW",
-        },
-        {
-            id: 2,
-            name: "Spin Fidget",
-            description: "A smooth spinning fidget toy perfect for stress relief and focus. Features premium bearings for silent operation and long-lasting performance.",
-            image: keyboardFidget,
-            price: 19.99,
-            badge: "POPULAR",
-        },
-        {
-            id: 3,
-            name: "Click Fidget",
-            description: "Satisfying clicking mechanism that provides tactile feedback. Great for anxiety relief and concentration during work or study sessions.",
-            image: keyboardFidget,
-            price: 14.99,
-            badge: null,
-        },
-        {
-            id: 4,
-            name: "Stress Ball",
-            description: "Premium quality stress ball with ergonomic design. Helps relieve tension and improve hand strength with daily use.",
-            image: keyboardFidget,
-            price:  12.99,
-            badge: "SALE",
-        }
-    ]);
+    const navigate = useNavigate()
+    const { cart, setCart } = useContext(CartContext)
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
-    const handleProductClick = (productId) => {
-        navigate(`/product/${productId}`);
-    };
-    
     useEffect(() => {
-        console.log(cart);
-    }, [cart]);
-    
-    return (
+        let isMounted = true
 
+        getProducts()
+            .then(({ data, error: requestError }) => {
+                if (!isMounted) return
+
+                if (requestError) {
+                    setError(requestError.message)
+                    return
+                }
+
+                setProducts(data ?? [])
+                console.log('Products fetched from Supabase:', data)
+                console.table(data ?? [])
+            })
+            .catch((requestError) => {
+                if (!isMounted) return
+
+                console.error('Supabase products request failed:', requestError)
+                setError(requestError.message)
+            })
+            .finally(() => {
+                if (isMounted) setLoading(false)
+            })
+
+        return () => {
+            isMounted = false
+        }
+    }, [])
+
+    const addToCart = (product) => {
+        const existingProduct = cart.find((item) => item.id === product.id)
+
+        if (existingProduct) {
+            setCart(cart.map((item) => (
+                item.id === product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            )))
+            return
+        }
+
+        setCart([...cart, { ...product, quantity: 1 }])
+    }
+
+    return (
         <section id="products" className="products-section">
             <div className="products-container">
+                <span className="products-eyebrow">MADE FOR YOUR MOMENTS</span>
                 <h2>Our Products</h2>
                 <p className="subtitle">Discover our premium fidget toys designed for relaxation and focus</p>
-                <div className="products-grid">
-                    {products.map((product) => (
-                        <div 
-                            className="product-card" 
-                            key={product.id}
 
-                        >
-                            <div className="image-wrapper">
-                                {product.badge && <span className="badge">{product.badge}</span>}
-                                <img   onClick={() => handleProductClick(product.id)} src={product.image} alt={product.name} />
+                {loading && <p className="products-status">Loading products...</p>}
+                {error && <p className="products-status products-error">Could not load products: {error}</p>}
+                {!loading && !error && products.length === 0 && (
+                    <p className="products-status">No products are available right now.</p>
+                )}
+
+                {!loading && !error && products.length > 0 && (
+                    <div className="products-grid">
+                        {products.map((product) => (
+                            <div className="product-card" key={product.id}>
+                                <div className="image-wrapper">
+                                    {product.image && (
+                                        <button
+                                            className="product-image-button"
+                                            type="button"
+                                            onClick={() => navigate(`/product/${product.id}`)}
+                                            aria-label={`View ${product.name}`}
+                                        >
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                onError={(event) => console.error('Failed to load product image:', event.currentTarget.src)}
+                                            />
+                                        </button>
+                                    )}
+                                    <span className="image-hint">VIEW PRODUCT <span aria-hidden="true">↗</span></span>
+                                </div>
+                                <div className="product-card-content">
+                                    <button
+                                        className="product-name-button"
+                                        type="button"
+                                        onClick={() => navigate(`/product/${product.id}`)}
+                                    >
+                                        <h3>{product.name}</h3>
+                                        <span aria-hidden="true">↗</span>
+                                    </button>
+                                    <p>{product.description}</p>
+                                </div>
+                                <div className="card-footer">
+                                    <span className="price">
+                                        <small>PRICE</small>
+                                        {product.price} <small>EGP</small>
+                                    </span>
+                                    <button type="button" onClick={() => addToCart(product)}>
+                                        <span aria-hidden="true">＋</span> Add to Cart
+                                    </button>
+                                </div>
                             </div>
-                            <h3>{product.name}</h3>
-                            <p>{product.description}</p>
-                            <div className="card-footer">
-                                <span className="price">{product.price}</span>
-                                <button onClick={()=>{
-                            
-                                  if(!cart.some(item => item.id === product.id)){
-                                    setCart([...cart, { ...product, quantity: 1 }])
-                                  } else {
-                                    setCart(cart.map(item => item.id === product.id ? {...item, quantity: item.quantity + 1} : item))
-                                  }
-                                }} >Add to Cart</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
-    );
+    )
 }
