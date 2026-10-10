@@ -20,7 +20,7 @@ export async function getProducts() {
 
   const { data, error } = await supabase
     .from('products')
-    .select('*')
+    .select('id, name, description, price, image, created_at')
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -36,35 +36,12 @@ export async function getProductById(id) {
 
   const { data, error } = await supabase
     .from('products')
-    .select('*')
+    .select('id, name, description, price, image, created_at')
     .eq('id', id)
     .maybeSingle()
 
   if (error) {
     console.error('Error fetching product:', error.message)
-    return { data: null, error }
-  }
-
-  return { data, error: null }
-}
-
-export async function createOrder(order) {
-  if (!supabase) return configurationError('creating order')
-
-  const { data, error } = await supabase
-    .from('orders')
-    .insert({
-      customer_name: order.customer_name,
-      phone: order.phone,
-      address: order.address,
-      product_id: order.product_id,
-      quantity: order.quantity,
-    })
-    .select()
-    .single()
-
-  if (error) {
-    console.error('Error creating order:', error.message)
     return { data: null, error }
   }
 
