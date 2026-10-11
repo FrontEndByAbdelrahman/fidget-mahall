@@ -407,6 +407,27 @@
     transform: translateY(0);
 }
 
+.checkout-btn:disabled {
+    cursor: wait;
+    opacity: 0.7;
+    transform: none;
+}
+
+.customer-form-message {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.customer-form-message.error {
+    color: #ff9b86;
+}
+
+.customer-form-message.success {
+    color: #86d6a6;
+}
+
 /* =========================
    Tablet
 ========================= */

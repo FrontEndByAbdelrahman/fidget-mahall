@@ -1,9 +1,74 @@
   import "./style/CheckOut.css";
 
-  import { useContext } from 'react'
+  import { useContext, useState } from 'react'
  import { CartContext } from './context/Cart'
+ import { submitCheckout } from './lib/supabase'
    function CheckOut(){
     const { cart, setCart } = useContext(CartContext)
+    const [submission, setSubmission] = useState({ status: 'idle', message: '' })
+    const [requestId, setRequestId] = useState(() => crypto.randomUUID())
+
+    const handleCustomerSubmit = async (event) => {
+      event.preventDefault()
+      if (cart.length === 0) {
+        setSubmission({
+          status: 'error',
+          message: 'Your cart is empty. Add a product before submitting checkout.',
+        })
+        return
+      }
+
+      const form = event.currentTarget
+      const formData = new FormData(form)
+      const customer = {
+        'full-name': formData.get('full-name'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        'user-address': formData.get('user-address'),
+      }
+
+      setSubmission({ status: 'submitting', message: '' })
+
+      try {
+        const { error } = await submitCheckout(customer, cart, requestId)
+
+        if (error) {
+          const messageByCode = {
+            '22023': 'Your cart or customer information is invalid. Review the form and cart, then try again.',
+            '42P01': 'Supabase could not find the public.users table. Confirm the table name and schema.',
+            '42703': 'A users column name does not match the form. Confirm the column names and refresh the Supabase API schema.',
+            '23502': 'The users table requires another column that has no default value.',
+            '23514': 'One of the submitted values did not pass the users table validation.',
+            PGRST204: 'Supabase could not find a users column in its API schema. Refresh the schema cache and verify the column name.',
+            PGRST205: 'Supabase could not find public.users in its API schema. Refresh the schema cache and verify the table name.',
+            PGRST202: 'Supabase could not find the checkout function in its API schema. Run checkout_inventory_rpc.sql again and confirm it returns public.submit_checkout(jsonb,jsonb,uuid).',
+          }
+          setSubmission({
+            status: 'error',
+            message: error.code === '42501'
+              ? `Supabase denied checkout: ${error.message} Run checkout_inventory_rpc.sql in this project's SQL Editor.`
+              : error.message?.includes('Insufficient stock')
+                ? 'One or more products no longer have enough stock. Update your cart and try again.'
+              : messageByCode[error.code] ?? `${error.message} Please verify that checkout_inventory_rpc.sql was run against the project configured in this app.`,
+          })
+          return
+        }
+
+        form.reset()
+        setCart([])
+        setRequestId(crypto.randomUUID())
+        setSubmission({
+          status: 'success',
+          message: 'Checkout submitted successfully. Inventory has been updated.',
+        })
+      } catch (error) {
+        console.error('Customer information request failed:', error)
+        setSubmission({
+          status: 'error',
+          message: `${error.message || 'A network error occurred.'} Check the Supabase URL and publishable key, then try again.`,
+        })
+      }
+    }
 
     const handleQuantityChange = (id, newQuantity) => {
       if (newQuantity < 1) return;
@@ -92,14 +157,18 @@
     <div className="checkout-right">
     <p className="customer-title">Customer Information</p>
 
-    <form className="customer-form">
+    <form className="customer-form" onSubmit={handleCustomerSubmit}>
 
         <div className="form-group">
             <label htmlFor="name">Full Name</label>
             <input
                 id="name"
+                name="full-name"
                 type="text"
                 placeholder="Enter your full name"
+                autoComplete="name"
+                maxLength={120}
+                required
             />
         </div>
 
@@ -107,8 +176,12 @@
             <label htmlFor="phone">Phone Number</label>
             <input
                 id="phone"
+                name="phone"
                 type="tel"
                 placeholder="Enter your phone number"
+                autoComplete="tel"
+                maxLength={40}
+                required
             />
         </div>
 
@@ -116,8 +189,12 @@
             <label htmlFor="email">Email Address</label>
             <input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="Enter your email"
+                autoComplete="email"
+                maxLength={254}
+                required
             />
         </div>
 
@@ -125,13 +202,23 @@
             <label htmlFor="address">Address</label>
             <textarea
                 id="address"
+                name="user-address"
                 placeholder="Enter your address"
                 rows="3"
+                autoComplete="street-address"
+                maxLength={500}
+                required
             ></textarea>
         </div>
 
-        <button type="submit" className="checkout-btn">
-            Continue to Order
+        {submission.message && (
+          <p className={`customer-form-message ${submission.status}`} role={submission.status === 'error' ? 'alert' : 'status'}>
+            {submission.message}
+          </p>
+        )}
+
+        <button type="submit" className="checkout-btn" disabled={submission.status === 'submitting'}>
+            {submission.status === 'submitting' ? 'Saving...' : 'Continue to Order'}
         </button>
 
     </form>

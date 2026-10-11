@@ -5,11 +5,29 @@ begin;
 revoke create on schema public from public, anon, authenticated;
 grant usage on schema public to anon, authenticated;
 
-revoke all privileges on all tables in schema public from public, anon, authenticated;
+revoke all privileges on table public.products from public, anon, authenticated;
 revoke all privileges on all sequences in schema public from public, anon, authenticated;
 revoke execute on all functions in schema public from public, anon, authenticated;
 
 alter table public.products enable row level security;
+
+do $$
+declare
+  column_name text;
+begin
+  for column_name in
+    select columns.column_name
+    from information_schema.columns as columns
+    where columns.table_schema = 'public'
+      and columns.table_name = 'products'
+  loop
+    execute format(
+      'revoke select (%1$I) on table public.products from public, anon, authenticated',
+      column_name
+    );
+  end loop;
+end
+$$;
 
 do $$
 declare
@@ -29,7 +47,8 @@ begin
 end
 $$;
 
-grant select on table public.products to anon, authenticated;
+grant select (id, name, description, price, image, created_at)
+on table public.products to anon, authenticated;
 
 create policy "Public can read product catalog"
 on public.products
