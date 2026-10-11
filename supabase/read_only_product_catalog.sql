@@ -29,9 +29,7 @@ begin
 end
 $$;
 
-grant select (id, name, description, price, image, created_at)
-on table public.products
-to anon, authenticated;
+grant select on table public.products to anon, authenticated;
 
 create policy "Public can read product catalog"
 on public.products

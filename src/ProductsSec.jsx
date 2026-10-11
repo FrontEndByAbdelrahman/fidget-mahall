@@ -72,8 +72,9 @@ export default function ProductsSec() {
 
                 {!loading && !error && products.length > 0 && (
                     <div className="products-grid">
-                        {products.map((product) => (
-                            <div className="product-card" key={product.id}>
+                        {products.map((product) => {
+                            return (
+                                <div className="product-card" key={product.id}>
                                 <div className="image-wrapper">
                                     {product.image && (
                                         <button
@@ -111,8 +112,9 @@ export default function ProductsSec() {
                                         <span aria-hidden="true">＋</span> Add to Cart
                                     </button>
                                 </div>
-                            </div>
-                        ))}
+                                </div>
+                            )
+                        })}
                     </div>
                 )}
             </div>

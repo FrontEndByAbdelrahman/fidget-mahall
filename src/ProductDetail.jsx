@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CartContext } from './context/Cart'
+import features from './featuresData'
 import { getProductById } from './lib/supabase'
 import './style/ProductDetail.css'
 
@@ -120,18 +121,15 @@ export default function ProductDetail() {
 
                     <div className="product-detail-divider" />
                     <div className="detail-features">
-                        <div className="feature-item">
-                            <span className="feature-icon">✓</span>
-                            <span>Premium Quality</span>
-                        </div>
-                        <div className="feature-item">
-                            <span className="feature-icon">✓</span>
-                            <span>Fast Delivery</span>
-                        </div>
-                        <div className="feature-item">
-                            <span className="feature-icon">✓</span>
-                            <span>30-Day Returns</span>
-                        </div>
+                        {features.map((feature) => (
+                            <div className="detail-feature-item" key={feature.title}>
+                                <span className="detail-feature-icon" aria-hidden="true">{feature.icon}</span>
+                                <div>
+                                    <h2>{feature.title}</h2>
+                                    <p>{feature.description}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

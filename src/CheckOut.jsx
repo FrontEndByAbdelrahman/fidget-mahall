@@ -26,7 +26,7 @@
       <div className="checkout-container">
       <div className="checkout-left">
    <p className="cart-section-title">Shopping Cart</p>
-   <div className="cart-items">
+    <div className="cart-items">
     {cart.map((item) => (
     <div className="co-item-card" key={item.id}>
       <div className="co-item-image">

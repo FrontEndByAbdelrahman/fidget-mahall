@@ -387,6 +387,38 @@
   gap: 13px;
 }
 
+.detail-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--color-muted);
+}
+
+.detail-feature-item h2 {
+  margin: 0 0 4px;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.detail-feature-item p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.detail-feature-icon {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  place-items: center;
+  border: 1px solid rgba(124, 108, 255, 0.32);
+  border-radius: 50%;
+  background: rgba(124, 108, 255, 0.1);
+  font-size: 13px;
+}
+
 .feature-item {
   font-size: 13px;
 }
