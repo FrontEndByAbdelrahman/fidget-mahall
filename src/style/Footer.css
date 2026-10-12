@@ -17,12 +17,12 @@
   font-size: 14px;
 }
 .heart {
-    color: red;
+    color: var(--color-accent);
     font-size: 1.2rem;
     transition: transform 0.3s ease;
 }
 .heart {
-    color: red;
+    color: var(--color-accent);
     font-size: 1.2rem;
     display: inline-block;
 
@@ -39,7 +39,7 @@
     }
 
     50% {
-        transform: scale(1ز2);
+        transform: scale(1.2);
     }
 
     70% {

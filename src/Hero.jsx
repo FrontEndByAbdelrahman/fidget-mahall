@@ -12,22 +12,19 @@ const images = [
 
 export default function Hero() {
   const [currentImage, setCurrentImage] = useState(0)
-  const [prevImage, setPrevImage] = useState(0)
-  const [transition, setTransition] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
-  useEffect(()=>{
-   const interval = setInterval(() => {
-    setPrevImage(currentImage)
-    setTransition(true)
-    setTimeout(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length)
-    }, 100)
-    setTimeout(() => {
-      setTransition(false)
-    }, 1100)
-   }, 3000)
-   return () => clearInterval(interval)
-  },[currentImage])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true)
+      setTimeout(() => {
+        setCurrentImage((prev) => (prev + 1) % images.length)
+        setIsAnimating(false)
+      }, 100)
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   const scrollToProducts = () => {
     const element = document.getElementById('products')
@@ -38,14 +35,17 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <div
-        className="hero-bg hero-bg-prev"
-        style={{ backgroundImage: `url("${images[prevImage]}")`, opacity: transition ? 0 : 1 }}
-      />
-      <div
-        className="hero-bg hero-bg-current"
-        style={{ backgroundImage: `url("${images[currentImage]}")`, opacity: transition ? 1 : 0 }}
-      />
+      <div className="hero-bg-wrapper">
+        {images.map((img, index) => (
+          <div
+            key={index}
+            className={`hero-bg ${index === currentImage ? 'hero-bg-active' : ''}`}
+            style={{ backgroundImage: `url("${img}")` }}
+          />
+        ))}
+        <div className="hero-overlay" />
+      </div>
+
       <div className="hero-content">
         <span className="hero-badge">NEW • KEYBOARD FIDGET</span>
 
@@ -60,7 +60,7 @@ export default function Hero() {
         </p>
 
         <div className="hero-actions">
-          <button onClick={scrollToProducts} className="hero-btn">Shop NOW</button>
+          <button onClick={scrollToProducts} className="hero-btn">Shop Now</button>
         </div>
       </div>
     </section>

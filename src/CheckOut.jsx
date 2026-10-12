@@ -81,8 +81,13 @@
       setCart(cart.filter(item => item.id !== id));
     };
 
+    function ShippingCost() {
+      if (cart.length === 0) {return 0;}
+      return 60;
+    }
+
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const shipping = 90;
+    const shipping = ShippingCost();
     const orderTotal = subtotal + shipping;
 
     return (

@@ -90,7 +90,7 @@ declare
   updated_product_name text;
   unit_price numeric;
   subtotal numeric := 0;
-  shipping numeric := 90;
+  shipping numeric := 60;
   total_price numeric;
   order_lines jsonb := '[]'::jsonb;
 begin

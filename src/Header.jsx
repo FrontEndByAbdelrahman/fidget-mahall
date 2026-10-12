@@ -1,6 +1,5 @@
  import "./style/App.css"
  import "./style/Header.css";
- import logo from "./assets/fidgetlogo.jpeg"
  import cartIcon from "./assets/shopping-cart.svg";
  import { useContext } from 'react'
  import { CartContext } from './context/Cart'
@@ -44,7 +43,10 @@ import { Link, useNavigate } from 'react-router-dom'
     return (
       <header>
       <div className="header-container">
-        <p className="brand" onClick={handleBrandClick}>FIDGET MAHALL</p>
+        <p className="brand" onClick={handleBrandClick}>
+          <span className="brand-mark" aria-hidden="true">F</span>
+          <span>FIDGET MAHALL</span>
+        </p>
 
 
         <div className="links">

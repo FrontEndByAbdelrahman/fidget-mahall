@@ -5,27 +5,124 @@
  scroll-behavior: smooth;
 }
 :root {
-   /* =========================
+  /* =========================
      Colors
   ========================= */
 
-    --color-primary: #ffffff;
-  --color-secondary: #0b0b0f;
-  --color-accent: #7c6cff;
+  /* Primary Colors */
+  --color-primary: #F8F5EA;
+  --color-on-accent: #17150F;
+  --color-secondary: #27241B;
 
-  --color-background: #0b0b0f;
-  --color-surface: #131318;
-  --color-text: #f5f5f7;
-  --color-muted: #9696a3;
+  /* Signature keycap gold */
+  --color-accent: #FFC629;
+  --color-accent-hover: #E9AD08;
+  --color-accent-light: rgba(255, 198, 41, 0.12);
+  --color-accent-rgb: 255, 198, 41;
+
+  /* Backgrounds */
+  --color-background: #111110;
+  --color-surface: #1B1B19;
+  --color-surface-elevated: #24231F;
+
+  /* Text Colors */
+  --color-text: #F8F5EA;
+  --color-text-secondary: #C7C0AE;
+  --color-muted: #8D887A;
+
+  /* Border & Lines */
+  --color-border: rgba(248, 245, 234, 0.09);
+  --color-border-hover: rgba(255, 198, 41, 0.32);
+
+  /* Functional Colors */
+  --color-success: #7BC68D;
+  --color-error: #F07867;
+  --color-warning: #FFC629;
 
   /* Typography */
-  --font-main: "Inter", sans-serif;
+  --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Spacing */
+  /* Typography Scale */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+
+  /* Font Weights */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.01em;
+  --letter-spacing-wider: 0.03em;
+
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+
+  /* Spacing Scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Container */
   --container-width: 1200px;
+  --container-narrow: 900px;
 
-  /* Border */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-accent: 0 6px 20px rgba(255, 198, 41, 0.2);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* Z-Index Scale */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+}
+
+body {
+  min-width: 320px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
