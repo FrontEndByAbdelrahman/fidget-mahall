@@ -14,8 +14,30 @@ import CheckOut from './CheckOut'
 
 function App() {
     const [cart, setCart] = useState(() => {
-        const savedCart = localStorage.getItem('cart')
-        return savedCart ? JSON.parse(savedCart) : []
+        try {
+            const savedCart = localStorage.getItem('cart')
+            if (!savedCart) return []
+
+            const parsedCart = JSON.parse(savedCart)
+
+            // Validate cart structure
+            if (!Array.isArray(parsedCart)) return []
+
+            return parsedCart.filter(item => (
+                item &&
+                typeof item === 'object' &&
+                (typeof item.id === 'string' || typeof item.id === 'number') &&
+                typeof item.quantity === 'number' &&
+                item.quantity > 0 &&
+                typeof item.price === 'number' &&
+                item.price >= 0 &&
+                typeof item.name === 'string' &&
+                typeof item.image === 'string'
+            ))
+        } catch (error) {
+            console.error('Failed to parse cart from localStorage:', error)
+            return []
+        }
     })
 
     useEffect(() => {

@@ -61,7 +61,7 @@
         setRequestId(crypto.randomUUID())
         setSubmission({
           status: 'success',
-          message: 'Checkout submitted successfully. Inventory has been updated.',
+          message: 'شكراً لك! تم استلام طلبك بنجاح وسيتم معالجته في أقرب وقت.',
         })
       } catch (error) {
         console.error('Customer information request failed:', error)
