@@ -1,9 +1,16 @@
 import "./style/Features.css";
 import features from './featuresData'
+import useScrollReveal from './useScrollReveal'
 
 export default function Features() {
+  const { ref, isVisible } = useScrollReveal()
+
   return (
-    <section id="features" className="features-section">
+    <section
+      ref={ref}
+      id="features"
+      className={`features-section section-reveal section-reveal--features${isVisible ? ' is-visible' : ''}`}
+    >
       <div className="features-container">
         <div className="features-heading">
           <span className="features-eyebrow">THE FIDGET MAHALL PROMISE</span>

@@ -3,6 +3,7 @@ import "./style/Hero.css";
 import image1 from "./assets/hero-background1.jpeg"
 import image2 from "./assets/hero-background2.jpeg";
 import image3 from "./assets/hero-background3.jpeg"
+import useScrollReveal from './useScrollReveal'
 
 const images = [
   image1,
@@ -13,6 +14,7 @@ const images = [
 export default function Hero() {
   const [currentImage, setCurrentImage] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const { ref, isVisible } = useScrollReveal()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,7 +36,10 @@ export default function Hero() {
   }
 
   return (
-    <section className="hero">
+    <section
+      ref={ref}
+      className={`hero section-reveal section-reveal--hero${isVisible ? ' is-visible' : ''}`}
+    >
       <div className="hero-bg-wrapper">
         {images.map((img, index) => (
           <div

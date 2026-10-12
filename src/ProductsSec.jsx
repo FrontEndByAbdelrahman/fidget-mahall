@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { CartContext } from './context/Cart'
 import { getProducts } from './lib/supabase'
 import './style/ProductsSec.css'
+import useScrollReveal from './useScrollReveal'
 
 export default function ProductsSec() {
+    const { ref, isVisible } = useScrollReveal()
     const navigate = useNavigate()
     const { cart, setCart } = useContext(CartContext)
     const [products, setProducts] = useState([])
@@ -58,7 +60,11 @@ export default function ProductsSec() {
     }
 
     return (
-        <section id="products" className="products-section">
+        <section
+            ref={ref}
+            id="products"
+            className={`products-section section-reveal section-reveal--products${isVisible ? ' is-visible' : ''}`}
+        >
             <div className="products-container">
                 <span className="products-eyebrow">MADE FOR YOUR MOMENTS</span>
                 <h2>Our Products</h2>

@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import '../src/style/App.css'
 import Header from './Header'
 import Hero from './Hero'
+import ProductStory from './ProductStory'
 import ProductsSec from './ProductsSec'
 import Features from './Features'
 import Footer from './Footer'
@@ -30,6 +31,7 @@ function App() {
                     <>
                         <Hero />
                         <ProductsSec />
+                        <ProductStory />
                         <Features />
                         <Footer />
                     </>

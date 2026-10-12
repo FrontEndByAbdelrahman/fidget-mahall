@@ -3,7 +3,9 @@
   import { useContext, useState } from 'react'
  import { CartContext } from './context/Cart'
  import { submitCheckout } from './lib/supabase'
+ import useScrollReveal from './useScrollReveal'
    function CheckOut(){
+    const { ref, isVisible } = useScrollReveal()
     const { cart, setCart } = useContext(CartContext)
     const [submission, setSubmission] = useState({ status: 'idle', message: '' })
     const [requestId, setRequestId] = useState(() => crypto.randomUUID())
@@ -91,7 +93,7 @@
     const orderTotal = subtotal + shipping;
 
     return (
-      <div className="checkout-page">
+      <div ref={ref} className={`checkout-page section-reveal section-reveal--checkout${isVisible ? ' is-visible' : ''}`}>
           <h1>CheckOut</h1>
       <div className="checkout-container">
       <div className="checkout-left">

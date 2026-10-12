@@ -4,8 +4,10 @@ import { CartContext } from './context/Cart'
 import features from './featuresData'
 import { getProductById } from './lib/supabase'
 import './style/ProductDetail.css'
+import useScrollReveal from './useScrollReveal'
 
 export default function ProductDetail() {
+    const { ref, isVisible } = useScrollReveal()
     const { id } = useParams()
     const navigate = useNavigate()
     const { cart, setCart } = useContext(CartContext)
@@ -64,7 +66,7 @@ export default function ProductDetail() {
 
     if (loading) {
         return (
-            <div className="product-detail-page">
+            <div ref={ref} className={`product-detail-page section-reveal section-reveal--detail${isVisible ? ' is-visible' : ''}`}>
                 <p className="product-detail-status">Loading product...</p>
             </div>
         )
@@ -72,7 +74,7 @@ export default function ProductDetail() {
 
     if (error) {
         return (
-            <div className="product-detail-page">
+            <div ref={ref} className={`product-detail-page section-reveal section-reveal--detail${isVisible ? ' is-visible' : ''}`}>
                 <p className="product-detail-status product-detail-error">
                     Could not load product: {error}
                 </p>
@@ -83,7 +85,7 @@ export default function ProductDetail() {
 
     if (!product) {
         return (
-            <div className="product-detail-page">
+            <div ref={ref} className={`product-detail-page section-reveal section-reveal--detail${isVisible ? ' is-visible' : ''}`}>
                 <div className="product-detail-modal">
                     <h1>Product not found</h1>
                     <button className="back-btn" onClick={() => navigate('/')}>Back to Products</button>
@@ -93,7 +95,7 @@ export default function ProductDetail() {
     }
 
     return (
-        <div className="product-detail-page">
+        <div ref={ref} className={`product-detail-page section-reveal section-reveal--detail${isVisible ? ' is-visible' : ''}`}>
             <button className="back-btn" onClick={() => navigate('/')}>
                 <span aria-hidden="true">←</span> Back to Products
             </button>
