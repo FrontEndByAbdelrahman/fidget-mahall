@@ -64,6 +64,22 @@ export default function ProductDetail() {
         setCart([...cart, { ...product, quantity: 1 }])
     }
 
+    const buyNow = () => {
+        const existingProduct = cart.find((item) => item.id === product.id)
+
+        if (existingProduct) {
+            setCart(cart.map((item) => (
+                item.id === product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            )))
+        } else {
+            setCart([...cart, { ...product, quantity: 1 }])
+        }
+
+        navigate('/checkout')
+    }
+
     if (loading) {
         return (
             <div ref={ref} className={`product-detail-page section-reveal section-reveal--detail${isVisible ? ' is-visible' : ''}`}>
@@ -118,7 +134,7 @@ export default function ProductDetail() {
                         <button className="add-to-cart-btn" onClick={addToCart}>
                             <span aria-hidden="true">＋</span> Add to Cart
                         </button>
-                        <button className="buy-now-btn" onClick={addToCart}>Buy Now <span aria-hidden="true">↗</span></button>
+                        <button className="buy-now-btn" onClick={buyNow}>Buy Now <span aria-hidden="true">↗</span></button>
                     </div>
 
                     <div className="product-detail-divider" />
