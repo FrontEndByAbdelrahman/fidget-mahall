@@ -1,5 +1,5 @@
 import './style/ProductStory.css'
-import storyImage from './assets/story-image.jpeg'
+import productVideo from './assets/b_Create_a_premium_15-.mp4'
 import useScrollReveal from './useScrollReveal'
 
 export default function ProductStory() {
@@ -13,11 +13,12 @@ export default function ProductStory() {
     >
       <div className="product-story-container">
         <div className="product-story-visual">
-          <img
-            className="product-story-image"
-            src={storyImage}
-            alt="Colorful keyboard key fidget keychain"
-            loading="lazy"
+          <video
+            className="product-story-video"
+            src={productVideo}
+            autoPlay
+            muted
+            playsInline
           />
           <div className="product-story-stamp" aria-hidden="true">
             <span>ONE</span>

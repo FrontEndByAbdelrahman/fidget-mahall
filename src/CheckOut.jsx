@@ -1,6 +1,6 @@
   import "./style/CheckOut.css";
 
-  import { useContext, useState } from 'react'
+  import { useContext, useState, useEffect } from 'react'
  import { CartContext } from './context/Cart'
  import { submitCheckout } from './lib/supabase'
  import useScrollReveal from './useScrollReveal'
@@ -9,6 +9,10 @@
     const { cart, setCart } = useContext(CartContext)
     const [submission, setSubmission] = useState({ status: 'idle', message: '' })
     const [requestId, setRequestId] = useState(() => crypto.randomUUID())
+
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
 
     const handleCustomerSubmit = async (event) => {
       event.preventDefault()
